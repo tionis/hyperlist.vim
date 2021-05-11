@@ -412,9 +412,9 @@ function! OpenFile()
   " let g:scadprogram = "autocad"
     else
       if has("gui_running")
-        exe 'e '.gofl
+        exe 'tabe '.gofl
       else
-        exe 'e '.gofl
+        exe 'tabe '.gofl
       endif
     endif
   else
