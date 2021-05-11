@@ -22,29 +22,5 @@
 " WOIM files are included for backward compatability (HyperList was earlier WOIM)
 au BufRead,BufNewFile *.hl,*.woim						 set filetype=hyperlist
 
-" Encryption autocommands {{{1
-" Using code from openssl.vim by Noah Spurrier <noah@noah.org>
-" dot-files (files starting with ".") gets auto en-/decryption
-augroup hl_autoencryption
-    autocmd!
-    autocmd BufReadPre,FileReadPre			.*.hl,.*.woim setlocal viminfo=
-    autocmd BufReadPre,FileReadPre			.*.hl,.*.woim setlocal noswapfile
-    autocmd BufReadPre,FileReadPre			.*.hl,.*.woim setlocal bin
-    autocmd BufReadPre,FileReadPre     	.*.hl,.*.woim setlocal cmdheight=2
-    autocmd BufReadPre,FileReadPre     	.*.hl,.*.woim setlocal shell=/bin/sh
-    autocmd BufReadPost,FileReadPost    .*.hl,.*.woim %!openssl bf -d -a 2>/dev/null
-    autocmd BufReadPost,FileReadPost		.*.hl,.*.woim setlocal nobin
-    autocmd BufReadPost,FileReadPost    .*.hl,.*.woim setlocal cmdheight&
-    autocmd BufReadPost,FileReadPost		.*.hl,.*.woim setlocal shell&
-    autocmd BufReadPost,FileReadPost		.*.hl,.*.woim execute ":doautocmd BufReadPost ".expand("%:r")
-    autocmd BufWritePre,FileWritePre		.*.hl,.*.woim setlocal bin
-    autocmd BufWritePre,FileWritePre		.*.hl,.*.woim setlocal cmdheight=2
-    autocmd BufWritePre,FileWritePre		.*.hl,.*.woim setlocal shell=/bin/sh
-    autocmd BufWritePre,FileWritePre    .*.hl,.*.woim %!openssl bf -e -a -salt 2>/dev/null
-    autocmd BufWritePost,FileWritePost	.*.hl,.*.woim silent u
-    autocmd BufWritePost,FileWritePost	.*.hl,.*.woim setlocal nobin
-    autocmd BufWritePost,FileWritePost	.*.hl,.*.woim setlocal cmdheight&
-    autocmd BufWritePost,FileWritePost	.*.hl,.*.woim setlocal shell&
-augroup END
 " vim modeline {{{1
 " vim: set sw=2 sts=2 et fdm=marker fillchars=fold\:\ :

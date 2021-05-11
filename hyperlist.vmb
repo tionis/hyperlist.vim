@@ -258,13 +258,6 @@ function! Renumber() range
 	endwhile
 endfunction
 
-"  Encryption {{{2
-"  Remove traces of secure info upon decrypting (part of) a HyperList
-function! HLdecrypt()
-  set viminfo=""
-  set noswapfile
-endfunction
-
 "  Underlining States/Transitions {{{2
 "  Mapped to <leader>u
 let g:STu=0
@@ -1027,12 +1020,6 @@ menu HyperList.Next\ Template\ Item<Tab>\\SPACE    /=\s*$<CR>A<CR>
 menu HyperList.Highlight\ Toggle<Tab>\\h           :call HighLight()<CR>
 menu HyperList.Presentation\ Move\ Down<Tab>gDOWN  <DOWN><leader>0zv
 menu HyperList.Presentation\ Move\ Up<Tab>gUP      <leader>f<UP><leader>0zv
-menu HyperList.Encryption\ (Requires\ OpenSSL).Encrypt<Tab>\\z :call HLdecrypt()<CR>V:!openssl bf -pbkdf2 -e -a -salt 2>/dev/null<CR><C-L>
-vmenu HyperList.Encryption\ (Requires\ OpenSSL).Encrypt\ Visual\ Selection<Tab>\\z :call HLdecrypt()<CR>gv:!openssl bf -pbkdf2 -e -a -salt 2>/dev/null<CR><C-L>
-menu HyperList.Encryption\ (Requires\ OpenSSL).Encrypt\ All<Tab>\\Z :call HLdecrypt()<CR>:%!openssl bf -pbkdf2 -e -a -salt 2>/dev/null<CR><C-L>
-menu HyperList.Encryption\ (Requires\ OpenSSL).Decrypt<Tab>\\x :call HLdecrypt()<CR>V:!openssl bf -pbkdf2 -d -a 2>/dev/null<CR><C-L>
-vmenu HyperList.Encryption\ (Requires\ OpenSSL).Decrypt\ Visual\ Selection<Tab>\\x :call HLdecrypt()<CR>gv:!openssl bf -pbkdf2 -d -a 2>/dev/null<CR><C-L>
-menu HyperList.Encryption\ (Requires\ OpenSSL).Decrypt\ All<Tab>\\X :call HLdecrypt()<CR>:%!openssl bf -pbkdf2 -d -a 2>/dev/null<CR><C-L>
 menu HyperList.Conversion.HTML<Tab>\\H             :call HTMLconversion()<CR>
 menu HyperList.Conversion.LaTeX<Tab>\\L            :call LaTeXconversion()<CR>
 menu HyperList.Conversion.TPP<Tab>\\T              :call TPPconversion()<CR>
@@ -1194,26 +1181,9 @@ parts of the HyperList will be preserved.
 
 See https://github.com/cbbrowne/tpp for information on TPP (Text Presentation Program)
 
-Use <leader>z to encrypt the current line (including all sublevels if folded).
-Use <leader>Z to encrypt the current file (all lines).
-Use <leader>x to decrypt the current line (mark all subsequent encrypted lines).
-Use <leader>X to decrypt the current file (all lines).
-
 If you enter the wrong password while trying to decrypt, you will end up with
 garbage characters. To fix it, press "u" (undo) and try decrypting again with
 the correct password.
-
-If you want a HyperList to be automatically encrypted upon saving and decrypted
-upon opening it, just prefix the filename with a dot (like ".password.hl"). It
-then turns off viminfo and swapfiles to ensure security.
-
-When using encryption in a HyperList or for the whole file, you will be asked
-for a password - twice when saving the file and once when opening it. You must
-have OpenSSL in your path to take advantage of these features.
-
-When running gVIM under Windows, encryption will spawn a DOS window where you
-enter the password for encryption/decryption. This window may be hidden under
-other windows.
 
 Syntax updated at start and every time you leave Insert mode, or you can press
 "zx" to update the syntax. 

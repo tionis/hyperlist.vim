@@ -56,15 +56,6 @@
 " Use <leader>H to convert the entire document to HTML.
 " Use <leader>T to convert the entire document to a basic TPP presentation.
 "
-" Use <leader>z encrypts the current line (including all sublevels if folded).
-" Use <leader>Z encrypts the current file (all lines).
-" Use <leader>x decrypts the current line.
-" Use <leader>X decrypts the current file (all lines).
-" <leader>z and <leader>x can be used with visual ranges.
-"
-" A dot file (file name starts with a "." such as .test.hl) is
-" automatically encrypted on save and decrypted on opening.
-"
 " You can add item tagged with future dates as items in your Google calendar.
 " Use <leader>G to automatically add all items with future dates to your
 " default calendar. Change your default under USER DEFINED SETTINGS below.
@@ -266,13 +257,6 @@ function! Renumber() range
 		endif
 		let lx += 1
 	endwhile
-endfunction
-
-"  Encryption {{{2
-"  Remove traces of secure info upon decrypting (part of) a HyperList
-function! HLdecrypt()
-  setlocal viminfo=""
-  setlocal noswapfile
 endfunction
 
 "  Underlining States/Transitions {{{2
@@ -1062,12 +1046,6 @@ menu HyperList.Next\ Template\ Item<Tab>\\SPACE    /=\s*$<CR>A<CR>
 menu HyperList.Highlight\ Toggle<Tab>\\h           :call HighLight()<CR>
 menu HyperList.Presentation\ Move\ Down<Tab>gDOWN  <DOWN><leader>0zv
 menu HyperList.Presentation\ Move\ Up<Tab>gUP      <leader>f<UP><leader>0zv
-menu HyperList.Encryption\ (Requires\ OpenSSL).Encrypt<Tab>\\z :call HLdecrypt()<CR>V:!openssl bf -pbkdf2 -e -a -salt 2>/dev/null<CR><C-L>
-vmenu HyperList.Encryption\ (Requires\ OpenSSL).Encrypt\ Visual\ Selection<Tab>\\z :call HLdecrypt()<CR>gv:!openssl bf -pbkdf2 -e -a -salt 2>/dev/null<CR><C-L>
-menu HyperList.Encryption\ (Requires\ OpenSSL).Encrypt\ All<Tab>\\Z :call HLdecrypt()<CR>:%!openssl bf -pbkdf2 -e -a -salt 2>/dev/null<CR><C-L>
-menu HyperList.Encryption\ (Requires\ OpenSSL).Decrypt<Tab>\\x :call HLdecrypt()<CR>V:!openssl bf -pbkdf2 -d -a 2>/dev/null<CR><C-L>
-vmenu HyperList.Encryption\ (Requires\ OpenSSL).Decrypt\ Visual\ Selection<Tab>\\x :call HLdecrypt()<CR>gv:!openssl bf -pbkdf2 -d -a 2>/dev/null<CR><C-L>
-menu HyperList.Encryption\ (Requires\ OpenSSL).Decrypt\ All<Tab>\\X :call HLdecrypt()<CR>:%!openssl bf -pbkdf2 -d -a 2>/dev/null<CR><C-L>
 menu HyperList.Conversion.HTML<Tab>\\H             :call HTMLconversion()<CR>
 menu HyperList.Conversion.LaTeX<Tab>\\L            :call LaTeXconversion()<CR>
 menu HyperList.Conversion.TPP<Tab>\\T              :call TPPconversion()<CR>
