@@ -977,12 +977,6 @@ noremap <leader>6         :setlocal foldlevel=6<CR>
 noremap <leader>7         :setlocal foldlevel=7<CR>
 noremap <leader>8         :setlocal foldlevel=8<CR>
 noremap <leader>9         :setlocal foldlevel=9<CR>
-noremap <leader>a         :setlocal foldlevel=10<CR>
-noremap <leader>b         :setlocal foldlevel=11<CR>
-noremap <leader>c         :setlocal foldlevel=12<CR>
-noremap <leader>d         :setlocal foldlevel=13<CR>
-noremap <leader>e         :setlocal foldlevel=14<CR>
-noremap <leader>f         :setlocal foldlevel=15<CR>
 noremap <NUL>             zA
 noremap <SPACE>           za
 nnoremap zx               i<esc>
