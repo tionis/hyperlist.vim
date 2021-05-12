@@ -747,6 +747,8 @@ endfunction
 "  The function is mapped to <leader>G to add events to the default
 "  calendar - defined as g:calendar in your vimrc file.
 "  To add the events to another calendar, do :call CalendarAdd("yourcalendar")
+"  TODO; this doesn't seem to work anymore, and will be replaced by a custom
+"  script
 function! CalendarAdd(...)
   let l:count = 0
   let l:cal = a:0 > 0 ? a:1 : g:calendar
@@ -961,6 +963,7 @@ noremap <leader>6         :setlocal foldlevel=6<CR>
 noremap <leader>7         :setlocal foldlevel=7<CR>
 noremap <leader>8         :setlocal foldlevel=8<CR>
 noremap <leader>9         :setlocal foldlevel=9<CR>
+noremap <leader>f         :setlocal foldlevel=16<CR>
 noremap <NUL>             zA
 noremap <SPACE>           za
 nnoremap zx               i<esc>
